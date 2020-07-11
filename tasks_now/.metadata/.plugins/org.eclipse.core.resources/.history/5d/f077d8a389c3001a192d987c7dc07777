@@ -1,0 +1,86 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.GridLayout;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import java.awt.FlowLayout;
+
+public class Adicionar extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField_1;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Adicionar frame = new Adicionar();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Adicionar() {
+		setTitle("Editar");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		Box verticalBox = Box.createVerticalBox();
+		panel.add(verticalBox);
+		
+		Box horizontalBox = Box.createHorizontalBox();
+		verticalBox.add(horizontalBox);
+		
+		JLabel lbl2 = new JLabel("Titulo");
+		horizontalBox.add(lbl2);
+		
+		textField_1 = new JTextField();
+		horizontalBox.add(textField_1);
+		textField_1.setColumns(10);
+		
+		Box horizontalBox_1 = Box.createHorizontalBox();
+		verticalBox.add(horizontalBox_1);
+		
+		JLabel lbl1 = new JLabel("Descricao");
+		horizontalBox_1.add(lbl1);
+		
+		textField = new JTextField();
+		horizontalBox_1.add(textField);
+		textField.setColumns(10);
+		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.SOUTH);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		panel_2.add(btnCancelar);
+		
+		JButton btnSalvar = new JButton("Salvar");
+		panel_2.add(btnSalvar);
+	}
+
+}

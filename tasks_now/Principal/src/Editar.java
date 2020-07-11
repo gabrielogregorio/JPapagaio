@@ -1,0 +1,85 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.GridLayout;
+import javax.swing.Box;
+
+public class Editar extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField_1;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Editar frame = new Editar();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Editar() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		Box verticalBox = Box.createVerticalBox();
+		panel.add(verticalBox);
+		
+		JPanel panel_1 = new JPanel();
+		verticalBox.add(panel_1);
+		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		panel_1.add(lblNewLabel_1);
+		
+		textField_1 = new JTextField();
+		panel_1.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JPanel panel_1_1 = new JPanel();
+		verticalBox.add(panel_1_1);
+		panel_1_1.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JLabel lblNewLabel_1_1 = new JLabel("New label");
+		panel_1_1.add(lblNewLabel_1_1);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		panel_1_1.add(textField);
+		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.SOUTH);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		panel_2.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("New button");
+		panel_2.add(btnNewButton);
+	}
+
+}

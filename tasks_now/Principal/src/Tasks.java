@@ -1,0 +1,154 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.Box;
+import java.awt.Component;
+
+public class Tasks extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Tasks frame = new Tasks();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Tasks() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		JPanel superior_botoes = new JPanel();
+		contentPane.add(superior_botoes, BorderLayout.NORTH);
+		
+		JButton btnNewButton = new JButton("Tarefas");
+		superior_botoes.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Concluidas");
+		superior_botoes.add(btnNewButton_1);
+		
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JPanel painel_post = new JPanel();
+		panel_1.add(painel_post);
+		
+		JPanel posts_1 = new JPanel();
+		painel_post.add(posts_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("Fazer a tarefa");
+		posts_1.add(lblNewLabel_1);
+		
+		JPanel posts_btn_1 = new JPanel();
+		posts_1.add(posts_btn_1);
+		
+		JButton btnNewButton_2_2 = new JButton("Top");
+		posts_btn_1.add(btnNewButton_2_2);
+		
+		JButton btnNewButton_3_1 = new JButton("Down");
+		posts_btn_1.add(btnNewButton_3_1);
+		
+		JButton btnNewButton_4_1 = new JButton("X");
+		posts_btn_1.add(btnNewButton_4_1);
+		
+		JButton btnNewButton_5_1 = new JButton("Feito");
+		posts_btn_1.add(btnNewButton_5_1);
+		
+		JPanel posts_1_1 = new JPanel();
+		painel_post.add(posts_1_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Fazer a tarefa");
+		posts_1_1.add(lblNewLabel_1_1);
+		
+		JPanel posts_btn_1_1 = new JPanel();
+		posts_1_1.add(posts_btn_1_1);
+		
+		JButton btnNewButton_2_2_1 = new JButton("Top");
+		posts_btn_1_1.add(btnNewButton_2_2_1);
+		
+		JButton btnNewButton_3_1_1 = new JButton("Down");
+		posts_btn_1_1.add(btnNewButton_3_1_1);
+		
+		JButton btnNewButton_4_1_1 = new JButton("X");
+		posts_btn_1_1.add(btnNewButton_4_1_1);
+		
+		JButton btnNewButton_5_1_1 = new JButton("Feito");
+		posts_btn_1_1.add(btnNewButton_5_1_1);
+		
+		JPanel posts_2 = new JPanel();
+		painel_post.add(posts_2);
+		
+		JLabel lblNewLabel_2 = new JLabel("Fazer a tarefa");
+		posts_2.add(lblNewLabel_2);
+		
+		JPanel posts_btn_2 = new JPanel();
+		posts_2.add(posts_btn_2);
+		
+		JButton btnNewButton_2_3 = new JButton("Top");
+		posts_btn_2.add(btnNewButton_2_3);
+		
+		JButton btnNewButton_3_2 = new JButton("Down");
+		posts_btn_2.add(btnNewButton_3_2);
+		
+		JButton btnNewButton_4_2 = new JButton("X");
+		posts_btn_2.add(btnNewButton_4_2);
+		
+		JButton btnNewButton_5_2 = new JButton("Feito");
+		posts_btn_2.add(btnNewButton_5_2);
+		
+		JPanel posts = new JPanel();
+		painel_post.add(posts);
+		
+		JLabel lblNewLabel = new JLabel("Fazer a tarefa");
+		posts.add(lblNewLabel);
+		
+		JPanel posts_btn = new JPanel();
+		posts.add(posts_btn);
+		
+		JButton btnNewButton_2 = new JButton("Top");
+		posts_btn.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("Down");
+		posts_btn.add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("X");
+		posts_btn.add(btnNewButton_4);
+		
+		JButton btnNewButton_5 = new JButton("Feito");
+		posts_btn.add(btnNewButton_5);
+		
+		JPanel inferior = new JPanel();
+		contentPane.add(inferior, BorderLayout.SOUTH);
+		
+		JButton btnNewButton_2_1 = new JButton("+");
+		inferior.add(btnNewButton_2_1);
+		
+		JLabel lblAdicionarNovaTarefa = new JLabel("Adicionar nova tarefa");
+		inferior.add(lblAdicionarNovaTarefa);
+	}
+
+}
