@@ -9,20 +9,14 @@ public class BD{
 	private String msg;
 	private String banco, usuario, senha;
 	private Class<?> forName;
-
-      /* Metodo Construtor: inicializa alguns atributos do objeto
-         Parametros: b-nome do banco de dados / u-nome o usuario / s-senha 
-      */   
+   
       public BD(String b, String u, String s){
-		 this.banco="jdbc:mysql://localhost/JPAPAGAIO"; // + "" b;
+		 this.banco="jdbc:mysql://localhost/TASKSNOW"; // + "" b;
 		 this.usuario= "root"; //u;
 		 this.senha= ""; //s;
 		 erro=false;
 		 msg="";
 	 }
-       /* Metodo conectaBD: realiza a conexao com o banco de dados
-          Retorno: TRUE-conexao realizada / FALSE-falha na conexao 
-       */ 
 	 public boolean conectaBD(){
 		 this.erro=false;
 	       try {
@@ -41,10 +35,6 @@ public class BD{
 			}
 		return !erro;      
 	}
-      /* Metodo: consulta
-         Parametro: c-comando SQL de consulta (SELECT)
-         Retorno: objeto ResultSet com o resultado da consulta
-      */ 
 	public ResultSet consulta (String c){
 		ResultSet res=null;
 		this.erro=false;
@@ -56,24 +46,27 @@ public class BD{
 		 }
 		return res;
 	}
-      /* Metodo: atualiza
-         Parametro: c-comando SQL de atualizado (INSERT, UPDATE, DELETE)
-         Retorno: TRUE-comando executado com sucesso / FALSE-falha na execao
-      */ 
 	public boolean atualiza(String c){
 		int i=-1;
 		this.erro=false;
 		this.msg="Operacao realizada com sucesso!";
-		try{
-			i=stmt.executeUpdate(c);
-		}catch (SQLException e){this.erro=true; 
+		System.out.println("....");
+
+		try
+		{
+			i = stmt.executeUpdate(c);
+			System.out.println(i);
+			
+		}
+		catch (SQLException e)
+		{
+			System.out.println("Erro ao atualizar registro => " + e.getMessage());
+			this.erro=true; 
 			this.msg="Falha na operaao!";
-             }
+        }
+
 		return !erro;
 	}
-      /* Metodo desconecta: fecha a conexao com o banco de dados
-         Retorno: TRUE-desconexao realizada / FALSE-falha na desconexao
-      */ 
 	public boolean desconecta(){
 		boolean sucesso=true;
 		try{
@@ -82,17 +75,10 @@ public class BD{
 		}catch(SQLException e){sucesso=false;}
 		return sucesso;
 	}
-      /* Metodo ocorreuErro: retorna o valor do atributo erro
-         Retorno: TRUE-ocorreu um erro durante uma operacao 
-                  FALSE-nao ocorreu nenhum erro 
-      */ 
 	public boolean ocorreuErro(){
 		return this.erro;
 	}
-       /* Metodo mensagem: retorna o valor do atributo mensagem
-          Retorno: Mensagem sobre um possavel erro que possa ter ocorrido 
-                    durante a realizacao de uma operacao
-       */ 
+
 	public String mensagem(){
 		return this.msg;
 	}

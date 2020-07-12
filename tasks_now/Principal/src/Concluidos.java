@@ -7,6 +7,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.Box;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
+import java.awt.Color;
 
 public class Concluidos extends JFrame {
 
@@ -37,116 +43,87 @@ public class Concluidos extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
+		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel superior_botoes = new JPanel();
 		contentPane.add(superior_botoes);
+		superior_botoes.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btnNewButton = new JButton("Tarefas");
 		superior_botoes.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Concluidas");
 		superior_botoes.add(btnNewButton_1);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Tasks janela = new Tasks();
+				janela.setVisible(true);
+				setVisible(false);
+			}
+		});
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1);
-		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
+		JPanel panel = new JPanel();
+		contentPane.add(panel);
 		
-		JPanel painel_post = new JPanel();
-		panel_1.add(painel_post);
+		Box horizontalBox = Box.createHorizontalBox();
+		panel.add(horizontalBox);
 		
-		JPanel posts_1 = new JPanel();
-		painel_post.add(posts_1);
+		Box verticalBox = Box.createVerticalBox();
+		horizontalBox.add(verticalBox);
 		
-		JLabel lblNewLabel_1 = new JLabel("Fazer a tarefa");
-		posts_1.add(lblNewLabel_1);
+		JLabel lblNewLabel_1_1 = new JLabel("Fazer o sistema d");
+		verticalBox.add(lblNewLabel_1_1);
 		
-		JPanel posts_btn_1 = new JPanel();
-		posts_1.add(posts_btn_1);
+		JLabel lblNewLabel_1_1_1 = new JLabel("Fazer o sistema de conexão remota");
+		verticalBox.add(lblNewLabel_1_1_1);
 		
-		JButton btnNewButton_2_2 = new JButton("Top");
-		posts_btn_1.add(btnNewButton_2_2);
+		Box verticalBox_1 = Box.createVerticalBox();
+		horizontalBox.add(verticalBox_1);
 		
-		JButton btnNewButton_3_1 = new JButton("Down");
-		posts_btn_1.add(btnNewButton_3_1);
-		
-		JButton btnNewButton_4_1 = new JButton("X");
-		posts_btn_1.add(btnNewButton_4_1);
-		
-		JButton btnNewButton_5_1 = new JButton("Feito");
-		posts_btn_1.add(btnNewButton_5_1);
-		
-		JPanel posts_1_1 = new JPanel();
-		painel_post.add(posts_1_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Fazer a tarefa");
-		posts_1_1.add(lblNewLabel_1_1);
-		
-		JPanel posts_btn_1_1 = new JPanel();
-		posts_1_1.add(posts_btn_1_1);
-		
-		JButton btnNewButton_2_2_1 = new JButton("Top");
-		posts_btn_1_1.add(btnNewButton_2_2_1);
-		
-		JButton btnNewButton_3_1_1 = new JButton("Down");
-		posts_btn_1_1.add(btnNewButton_3_1_1);
+		JButton btnNewButton_4_1_1_1 = new JButton("X");
+		btnNewButton_4_1_1_1.setBackground(new Color(238, 238, 238));
+		btnNewButton_4_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_4_1_1_1.setForeground(Color.RED);
+		btnNewButton_4_1_1_1.setName("xddd");
+		verticalBox_1.add(btnNewButton_4_1_1_1);
 		
 		JButton btnNewButton_4_1_1 = new JButton("X");
-		posts_btn_1_1.add(btnNewButton_4_1_1);
-		
-		JButton btnNewButton_5_1_1 = new JButton("Feito");
-		posts_btn_1_1.add(btnNewButton_5_1_1);
-		
-		JPanel posts_2 = new JPanel();
-		painel_post.add(posts_2);
-		
-		JLabel lblNewLabel_2 = new JLabel("Fazer a tarefa");
-		posts_2.add(lblNewLabel_2);
-		
-		JPanel posts_btn_2 = new JPanel();
-		posts_2.add(posts_btn_2);
-		
-		JButton btnNewButton_2_3 = new JButton("Top");
-		posts_btn_2.add(btnNewButton_2_3);
-		
-		JButton btnNewButton_3_2 = new JButton("Down");
-		posts_btn_2.add(btnNewButton_3_2);
-		
-		JButton btnNewButton_4_2 = new JButton("X");
-		posts_btn_2.add(btnNewButton_4_2);
-		
-		JButton btnNewButton_5_2 = new JButton("Feito");
-		posts_btn_2.add(btnNewButton_5_2);
-		
-		JPanel posts = new JPanel();
-		painel_post.add(posts);
-		
-		JLabel lblNewLabel = new JLabel("Fazer a tarefa");
-		posts.add(lblNewLabel);
-		
-		JPanel posts_btn = new JPanel();
-		posts.add(posts_btn);
-		
-		JButton btnNewButton_2 = new JButton("Top");
-		posts_btn.add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("Down");
-		posts_btn.add(btnNewButton_3);
-		
-		JButton btnNewButton_4 = new JButton("X");
-		posts_btn.add(btnNewButton_4);
-		
-		JButton btnNewButton_5 = new JButton("Feito");
-		posts_btn.add(btnNewButton_5);
-		
-		JPanel inferior = new JPanel();
-		contentPane.add(inferior);
-		
-		JButton btnNewButton_2_1 = new JButton("+");
-		inferior.add(btnNewButton_2_1);
-		
-		JLabel lblAdicionarNovaTarefa = new JLabel("Adicionar nova tarefa");
-		inferior.add(lblAdicionarNovaTarefa);
+		btnNewButton_4_1_1.setBackground(new Color(238, 238, 238));
+		btnNewButton_4_1_1.setForeground(Color.RED);
+		btnNewButton_4_1_1.setName("xddd");
+		verticalBox_1.add(btnNewButton_4_1_1);
+		//objRes.getString("ID"));
+		btnNewButton_4_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JButton botao = (JButton) arg0.getSource();
+				System.out.println( botao.getName().toString() );
+
+				String sqlInsert = "DELETE FROM TAREFAS WHERE ID = " + botao.getName().toString();
+
+  				System.out.println(sqlInsert);
+         		Dados.Inserir(sqlInsert);
+				setVisible(true);
+			}
+		});
+	
+			//}
+		///} catch (Exception e2 ) {
+			//System.out.println("Deu tudo errado mano, olha só = " + e2);
+		//}
+		 
+	///} else {
+		//System.out.println("Erro ao conectar ao banco! "  + Dados.objBD.mensagem());
+	///}
+	
+	
+	
+	
+	
+
+
 	}
 
 }

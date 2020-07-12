@@ -14,12 +14,22 @@ import java.awt.FlowLayout;
 import java.awt.Panel;
 import javax.swing.DropMode;
 import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Dimension;
 
 public class Adicionar extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField;
+	private JTextField textTitulo;
+	private JTextField textDescricao;
+	private JTextField textNumero;
 
 	/**
 	 * Launch the application.
@@ -45,44 +55,125 @@ public class Adicionar extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(238, 238, 238));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setBackground(new Color(238, 238, 238));
+		contentPane.add(panel);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		Box verticalBox_2 = Box.createVerticalBox();
+		verticalBox_2.setBackground(new Color(238, 238, 238));
+		panel.add(verticalBox_2);
+		
+		JPanel panel_1_1_1_1 = new JPanel();
+		panel_1_1_1_1.setMinimumSize(new Dimension(10, 200));
+		verticalBox_2.add(panel_1_1_1_1);
+		
+		Box horizontalBox_2 = Box.createHorizontalBox();
+		horizontalBox_2.setBackground(new Color(238, 238, 238));
+		horizontalBox_2.setFont(new Font("Dialog", Font.PLAIN, 25));
+		verticalBox_2.add(horizontalBox_2);
 		
 		Box verticalBox = Box.createVerticalBox();
-		panel.add(verticalBox);
-		
-		Box horizontalBox = Box.createHorizontalBox();
-		verticalBox.add(horizontalBox);
+		verticalBox.setBackground(new Color(238, 238, 238));
+		horizontalBox_2.add(verticalBox);
 		
 		JLabel lbl2 = new JLabel("Titulo");
-		horizontalBox.add(lbl2);
+		lbl2.setFont(new Font("Dialog", Font.PLAIN, 17));
+		verticalBox.add(lbl2);
 		
-		textField_1 = new JTextField();
-		horizontalBox.add(textField_1);
-		textField_1.setColumns(10);
-		
-		Box horizontalBox_1 = Box.createHorizontalBox();
-		verticalBox.add(horizontalBox_1);
+		JPanel panel_1_2 = new JPanel();
+		panel_1_2.setMinimumSize(new Dimension(10, 30));
+		verticalBox.add(panel_1_2);
 		
 		JLabel lbl1 = new JLabel("Descricao");
-		horizontalBox_1.add(lbl1);
+		lbl1.setFont(new Font("Dialog", Font.PLAIN, 17));
+		verticalBox.add(lbl1);
 		
-		textField = new JTextField();
-		horizontalBox_1.add(textField);
-		textField.setColumns(10);
+		JPanel panel_1_2_1 = new JPanel();
+		panel_1_2_1.setMinimumSize(new Dimension(10, 30));
+		verticalBox.add(panel_1_2_1);
+		
+		JLabel lblPrioridade = new JLabel("Prioridade    ");
+		lblPrioridade.setFont(new Font("Dialog", Font.PLAIN, 17));
+		verticalBox.add(lblPrioridade);
+		
+		Box verticalBox_1 = Box.createVerticalBox();
+		verticalBox_1.setBackground(new Color(238, 238, 238));
+		horizontalBox_2.add(verticalBox_1);
+		
+		textTitulo = new JTextField();
+		textTitulo.setFont(new Font("Dialog", Font.PLAIN, 17));
+		verticalBox_1.add(textTitulo);
+		textTitulo.setColumns(10);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setMinimumSize(new Dimension(10, 30));
+		verticalBox_1.add(panel_1);
+		
+		textDescricao = new JTextField();
+		textDescricao.setFont(new Font("Dialog", Font.PLAIN, 17));
+		verticalBox_1.add(textDescricao);
+		textDescricao.setColumns(10);
+		
+		JPanel panel_1_1 = new JPanel();
+		panel_1_1.setMinimumSize(new Dimension(10, 30));
+		verticalBox_1.add(panel_1_1);
+		
+		textNumero = new JTextField();
+		textNumero.setFont(new Font("Dialog", Font.PLAIN, 17));
+		verticalBox_1.add(textNumero);
+		textNumero.setColumns(10);
+		
+		JPanel panel_1_1_1 = new JPanel();
+		panel_1_1_1.setMinimumSize(new Dimension(10, 50));
+		verticalBox_2.add(panel_1_1_1);
 		
 		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2, BorderLayout.SOUTH);
+		panel_2.setBackground(new Color(238, 238, 238));
+		verticalBox_2.add(panel_2);
+		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setForeground(new Color(238, 238, 238));
+		btnSalvar.setAutoscrolls(true);
+		btnSalvar.setBackground(new Color(51, 204, 51));
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String sqlInsert = "INSERT INTO TAREFAS"
+						+ "(TITULO, DESCRICAO, PRIORIDADE, STATUS)"
+						+ "VALUES"
+						+ "('"
+						+ textTitulo.getText().toString()
+						+ "', '"
+						+ textDescricao.getText().toString()
+						+ "',"
+						+ textNumero.getText()
+						+ ", 'A FAZER')";
+				Dados.Inserir(sqlInsert);
+
+				Tasks janela = new Tasks();
+				janela.setVisible(true);
+				setVisible(false);
+			}
+		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setForeground(new Color(238, 238, 238));
+		btnCancelar.setBackground(new Color(255, 51, 51));
+		btnCancelar.setAutoscrolls(true);
 		panel_2.add(btnCancelar);
-		
-		JButton btnSalvar = new JButton("Salvar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Tasks janela = new Tasks();
+				janela.setVisible(true);
+				setVisible(false);
+			}
+		});
 		panel_2.add(btnSalvar);
 	}
 
