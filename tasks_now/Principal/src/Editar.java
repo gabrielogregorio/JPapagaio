@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.GridLayout;
@@ -34,7 +35,7 @@ public class Editar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Editar frame = new Editar();
+					Editar frame = new Editar("0","Tasks");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,14 +47,14 @@ public class Editar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Editar() {
+	public Editar(String ID, String voltarTela) {
 		setTitle("Editar");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				
 				
-				String sqlPesquisa = "SELECT ID, TITULO, DESCRICAO, PRIORIDADE, STATUS FROM TAREFAS WHERE ID = 1";
+				String sqlPesquisa = "SELECT ID, TITULO, DESCRICAO, PRIORIDADE, STATUS FROM TAREFAS WHERE ID = " + ID;
 				Dados.Consultar(sqlPesquisa);
 
 				if (Dados.objBD.conectaBD()) {
@@ -109,33 +110,33 @@ public class Editar extends JFrame {
 		Box verticalBox_1 = Box.createVerticalBox();
 		horizontalBox.add(verticalBox_1);
 		
-		JLabel lblNewLabel_1 = new JLabel("Titulo");
-		verticalBox_1.add(lblNewLabel_1);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel lbltitulo = new JLabel("Titulo");
+		verticalBox_1.add(lbltitulo);
+		lbltitulo.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		JPanel panel_1_1_1_1_1_1_1_1_1_1_1 = new JPanel();
 		panel_1_1_1_1_1_1_1_1_1_1_1.setMinimumSize(new Dimension(10, 50));
 		verticalBox_1.add(panel_1_1_1_1_1_1_1_1_1_1_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Descricao");
-		verticalBox_1.add(lblNewLabel_1_1);
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel lblDescricao = new JLabel("Descricao");
+		verticalBox_1.add(lblDescricao);
+		lblDescricao.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		JPanel panel_1_1_1_1_1_1_1_1_1_1 = new JPanel();
 		panel_1_1_1_1_1_1_1_1_1_1.setMinimumSize(new Dimension(10, 50));
 		verticalBox_1.add(panel_1_1_1_1_1_1_1_1_1_1);
 		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("Status");
-		verticalBox_1.add(lblNewLabel_1_1_1_1);
-		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel lblStatus = new JLabel("Status");
+		verticalBox_1.add(lblStatus);
+		lblStatus.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		JPanel panel_1_1_1_1_1_1_1_1_1 = new JPanel();
 		panel_1_1_1_1_1_1_1_1_1.setMinimumSize(new Dimension(10, 50));
 		verticalBox_1.add(panel_1_1_1_1_1_1_1_1_1);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Prioridade    ");
-		verticalBox_1.add(lblNewLabel_1_1_1);
-		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel lblPrioridade = new JLabel("Prioridade    ");
+		verticalBox_1.add(lblPrioridade);
+		lblPrioridade.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		Box verticalBox_2 = Box.createVerticalBox();
 		horizontalBox.add(verticalBox_2);
@@ -176,6 +177,13 @@ public class Editar extends JFrame {
 		verticalBox.add(panel_2);
 		
 		JButton btnNewButton_1 = new JButton("Cancelar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Tasks janela = new Tasks();
+				janela.setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnNewButton_1.setForeground(Color.WHITE);
 		btnNewButton_1.setBackground(new Color(255, 51, 51));
 		panel_2.add(btnNewButton_1);
@@ -185,16 +193,44 @@ public class Editar extends JFrame {
 		btnNewButton.setBackground(new Color(102, 153, 51));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String sqlInsert = "UPDATE TAREFAS SET "
-								+ "TITULO = '" + textField_titulo.getText().toString() + "', "
-								+ "DESCRICAO = '" +  textField_descricao.getText().toString() + "', "
-								+ "PRIORIDADE = " +  textField_prioridade.getText().toString() + ", "
-								+ "STATUS = '" +  textField_status.getText().toString() + "' "
-							+ " WHERE id = 1";
+				boolean sucesso = true;
 				
-				System.out.println(sqlInsert);
+				
+				String sqlAtualiza = "UPDATE TAREFAS SET "
+						+ "TITULO = '" + textField_titulo.getText().toString() + "', "
+						+ "DESCRICAO = '" +  textField_descricao.getText().toString() + "', "
+						+ "PRIORIDADE = " +  textField_prioridade.getText().toString() + ", "
+						+ "STATUS = '" +  textField_status.getText().toString() + "' "
+					+ " WHERE id = " + ID;
+
+
+				if (Dados.objBD.conectaBD()) {
+					try {
+						Dados.objBD.atualiza(sqlAtualiza);
+						System.out.println("Atualizado o valor");
+					} catch(Exception e) {
+						sucesso = false;
+						JOptionPane.showMessageDialog(null, "Erro => " + e + ", erro classe" + Dados.objBD.mensagem());
 						
-				Dados.Inserir(sqlInsert);
+					}			
+				} else {
+					sucesso = false;
+					JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco => " + Dados.objBD.mensagem());
+				}
+				
+				if (sucesso) {
+					if (voltarTela == "Tasks") {
+						Tasks janela = new Tasks();
+						janela.setVisible(true);
+						setVisible(false);
+					} else if (voltarTela == "Concluidos") {
+						Concluidos janela = new Concluidos();
+						janela.setVisible(true);
+						setVisible(false);
+						
+					}
+					 
+				}
 
 			}
 		});

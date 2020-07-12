@@ -23,13 +23,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Adicionar extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textTitulo;
 	private JTextField textDescricao;
-	private JTextField textNumero;
+	private JTextField textNumeroPrioridade;
 
 	/**
 	 * Launch the application.
@@ -82,17 +84,22 @@ public class Adicionar extends JFrame {
 		verticalBox.setBackground(new Color(238, 238, 238));
 		horizontalBox_2.add(verticalBox);
 		
-		JLabel lbl2 = new JLabel("Titulo");
-		lbl2.setFont(new Font("Dialog", Font.PLAIN, 17));
-		verticalBox.add(lbl2);
+		JLabel lbltitulo = new JLabel("Titulo");
+		lbltitulo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		lbltitulo.setFont(new Font("Dialog", Font.PLAIN, 17));
+		verticalBox.add(lbltitulo);
 		
 		JPanel panel_1_2 = new JPanel();
 		panel_1_2.setMinimumSize(new Dimension(10, 30));
 		verticalBox.add(panel_1_2);
 		
-		JLabel lbl1 = new JLabel("Descricao");
-		lbl1.setFont(new Font("Dialog", Font.PLAIN, 17));
-		verticalBox.add(lbl1);
+		JLabel lbldescricao = new JLabel("Descricao");
+		lbldescricao.setFont(new Font("Dialog", Font.PLAIN, 17));
+		verticalBox.add(lbldescricao);
 		
 		JPanel panel_1_2_1 = new JPanel();
 		panel_1_2_1.setMinimumSize(new Dimension(10, 30));
@@ -124,10 +131,10 @@ public class Adicionar extends JFrame {
 		panel_1_1.setMinimumSize(new Dimension(10, 30));
 		verticalBox_1.add(panel_1_1);
 		
-		textNumero = new JTextField();
-		textNumero.setFont(new Font("Dialog", Font.PLAIN, 17));
-		verticalBox_1.add(textNumero);
-		textNumero.setColumns(10);
+		textNumeroPrioridade = new JTextField();
+		textNumeroPrioridade.setFont(new Font("Dialog", Font.PLAIN, 17));
+		verticalBox_1.add(textNumeroPrioridade);
+		textNumeroPrioridade.setColumns(10);
 		
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setMinimumSize(new Dimension(10, 50));
@@ -152,7 +159,7 @@ public class Adicionar extends JFrame {
 						+ "', '"
 						+ textDescricao.getText().toString()
 						+ "',"
-						+ textNumero.getText()
+						+ textNumeroPrioridade.getText()
 						+ ", 'A FAZER')";
 				Dados.Inserir(sqlInsert);
 

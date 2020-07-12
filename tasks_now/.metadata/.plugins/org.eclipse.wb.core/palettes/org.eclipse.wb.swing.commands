@@ -4,4 +4,10 @@
 		id="org.eclipse.wb.swing.components javax.swing.JTextField"
 		category="org.eclipse.wb.swing.layouts"
 		nextEntry="org.eclipse.wb.swing.layouts java.awt.FlowLayout"/>
+	<moveCategory
+		id="org.eclipse.wb.swing.components.menu"
+		nextCategory="org.eclipse.wb.swing.components.menu"/>
+	<moveEntry
+		id="org.eclipse.wb.swing.BoxLayout javax.swing.Box createVerticalBox()"
+		category="org.eclipse.wb.swing.BoxLayout"/>
 </commands>
