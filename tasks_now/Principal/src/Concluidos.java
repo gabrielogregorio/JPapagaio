@@ -104,19 +104,18 @@ public class Concluidos extends JFrame {
 					horizontalConteudo_1_1.add(panel_post1_1);
 					
 					JLabel lblTitulo_1 = new JLabel(formataTexto(formataTexto(objRes.getString("PRIORIDADE").toString() + " - " + objRes.getString("TITULO").toString())));
+					lblTitulo_1.setName( objRes.getString("ID").toString() );
 					lblTitulo_1.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
 							JLabel botao = (JLabel) (e.getSource());
 							
-							Editar janela = new Editar(botao.getName().toString(), "Tasks");
+							Editar janela = new Editar(botao.getName().toString(), "Concluidos");
 							janela.setVisible(true);
 							setVisible(false);
 							
 						}
 					});
-
-					
 					panel_post1_1.add(lblTitulo_1);
 					
 					JButton btnSob_1 = new JButton("<");
@@ -173,14 +172,17 @@ public class Concluidos extends JFrame {
 							} else {
 								JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco => " + Dados.objBD.mensagem());
 							}
+							
+							Concluidos janela = new Concluidos();
+							janela.setVisible(true);
+							setVisible(false);
 						}
 					});
 					panel_post1_1.add(btnX_1);
 										
 					JPanel panel_POSTAGEM_2 = new JPanel();
 					verticalBox_1.add(panel_POSTAGEM_2);
-					
-				
+
 				}
 			} catch (Exception e2 ) {
 			System.out.println("Deu tudo errado mano, olha só = " + e2);
@@ -190,20 +192,10 @@ public class Concluidos extends JFrame {
 			System.out.println("Erro ao conectar ao banco! "  + Dados.objBD.mensagem());
 		}
 
-																				
-	
         JScrollPane scrollPane2 = new JScrollPane(panel_1);
 		scrollPane2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		//contentPane.setPreferredSize(new Dimension(500, 400));
 
 		contentPane.add(scrollPane2);
-
-	
-	
-	
-	
-
-
 	}
-
 }

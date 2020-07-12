@@ -59,9 +59,7 @@ public class Tasks extends JFrame {
 			JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco => " + Dados.objBD.mensagem());
 			return false;
 		}
-		
 		return true;
-
 	}
 	
 	public boolean alteraPrioridade(String tipoPrioridade, int ID) {
