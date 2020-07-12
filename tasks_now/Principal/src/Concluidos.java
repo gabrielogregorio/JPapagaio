@@ -21,23 +21,6 @@ import java.awt.Color;
 public class Concluidos extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Concluidos frame = new Concluidos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public String formataTexto(String valor) {
 		valor = valor + "                              ";
 		return valor.substring(0,30);

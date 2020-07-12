@@ -11,11 +11,11 @@ public class BD{
 	private Class<?> forName;
    
       public BD(String b, String u, String s){
-		 this.banco="jdbc:mysql://localhost/TASKSNOW"; // + "" b;
-		 this.usuario= "root"; //u;
-		 this.senha= ""; //s;
-		 erro=false;
-		 msg="";
+		 this.banco = "jdbc:mysql://localhost/" + b;
+		 this.usuario = u;
+		 this.senha = s;
+		 erro = false;
+		 msg = "";
 	 }
 	 public boolean conectaBD(){
 		 this.erro=false;

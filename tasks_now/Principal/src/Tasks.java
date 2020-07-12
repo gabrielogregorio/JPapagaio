@@ -1,16 +1,12 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.Box;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
@@ -49,11 +45,9 @@ public class Tasks extends JFrame {
 		if (Dados.objBD.conectaBD()) {
 			try {
 				Dados.objBD.atualiza(sqlAtualiza);
-				System.out.println("Atualizado o valor");
 			} catch(Exception e) {
-				JOptionPane.showMessageDialog(null, "Erro => " + e + ", erro classe" + Dados.objBD.mensagem());
+				JOptionPane.showMessageDialog(null, "Erro = " + e + ", erro classe" + Dados.objBD.mensagem());
 				return false;
-				
 			}			
 		} else {
 			JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco => " + Dados.objBD.mensagem());
@@ -66,18 +60,15 @@ public class Tasks extends JFrame {
 		String sqlPesquisa;
 		
 		if (tipoPrioridade == "+") {
-			sqlPesquisa = "SELECT ID, TITULO, DESCRICAO, PRIORIDADE, STATUS FROM TAREFAS WHERE STATUS != 'FEITO' ORDER BY PRIORIDADE";
+			sqlPesquisa = "SELECT ID, TITULO, DESCRICAO, PRIORIDADE, STATUS FROM TAREFAS WHERE STATUS != 'FEITO' ORDER BY PRIORIDADE ASC";
 		} else {
 			sqlPesquisa = "SELECT ID, TITULO, DESCRICAO, PRIORIDADE, STATUS FROM TAREFAS WHERE STATUS != 'FEITO' ORDER BY PRIORIDADE DESC";
 		}
 	
 		if (Dados.objBD.conectaBD()) {
-			System.out.println("Conectou ao banco de dados!");
 			ResultSet objRes = Dados.objBD.consulta(sqlPesquisa);
 			
-			
 				try {
-					int contador = 2;
 					int id_anterior = 0;
 					int prioridade_anterior = 0;
 					int id_analise;
@@ -89,7 +80,7 @@ public class Tasks extends JFrame {
 						prioridade =  Integer.parseInt(objRes.getString("PRIORIDADE").toString());
 						
 						if (id_analise == ID) {
-							// Valor já era o primeiro
+
 							if (id_anterior == 0) {
 								return true;
 							} else {
@@ -99,44 +90,28 @@ public class Tasks extends JFrame {
 								Tasks janela = new Tasks();
 								janela.setVisible(true);
 								setVisible(false);
-
 								
 								return true;
 							}
-						} else {
-							contador++;
 						}
 						
 						id_anterior = id_analise;
 						prioridade_anterior = prioridade;
-
-					
 					}
 				} catch (Exception e2 ) {
-					System.out.println("Deu tudo errado mano, olha só = " + e2);
+					JOptionPane.showMessageDialog(null, "Deu tudo errado mano, olha só = " + e2);
 				}
-			 
 			} else {
-				System.out.println("Erro ao conectar ao banco! "  + Dados.objBD.mensagem());
+				JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco! "  + Dados.objBD.mensagem());
 			}
-				
-			
-		
 		return true;
 	}
 	
 	public Tasks() {
-		setTitle("Inicio");
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowOpened(WindowEvent e) {
-			}
-		});
-
+		setTitle("Tarefas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
-	    //JFrame frame = new JFrame();
 		contentPane = new JPanel();
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -149,10 +124,6 @@ public class Tasks extends JFrame {
 		JButton btnTarefas = new JButton("Tarefas");
 		btnTarefas.setBackground(Color.GRAY);
 		btnTarefas.setForeground(Color.BLACK);
-		btnTarefas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		superior_botoes.add(btnTarefas);
 		
 		JButton btnConcluidos = new JButton("Concluidas");
@@ -162,7 +133,6 @@ public class Tasks extends JFrame {
 				Concluidos janela = new Concluidos();
 				janela.setVisible(true);
 				setVisible(false);
-				
 			}
 		});
 		superior_botoes.add(btnConcluidos);
@@ -224,7 +194,6 @@ public class Tasks extends JFrame {
 					});
 					panel_post1_1.add(btnSob_1);
 					
-					
 					JButton btnSub_1 = new JButton("-");
 					btnSub_1.setName( objRes.getString("ID").toString() );
 					btnSub_1.setForeground(Color.WHITE);
@@ -244,7 +213,6 @@ public class Tasks extends JFrame {
 					btnX_1.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							JButton botao = (JButton) (arg0.getSource());
-
 							String sqlExcluir = "DELETE FROM TAREFAS WHERE ID= " + botao.getName().toString();
 							
 							if (Dados.objBD.conectaBD()) {
@@ -278,15 +246,14 @@ public class Tasks extends JFrame {
 							if (Dados.objBD.conectaBD()) {
 								try {
 									Dados.objBD.atualiza(sqlAtualiza);
-									System.out.println("Atualizado o valor");
 								} catch(Exception e) {
 									sucesso = false;
-									JOptionPane.showMessageDialog(null, "Erro => " + e + ", erro classe" + Dados.objBD.mensagem());
+									JOptionPane.showMessageDialog(null, "Erro '" + e + "', erro classe = " + Dados.objBD.mensagem());
 									
 								}			
 							} else {
 								sucesso = false;
-								JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco => " + Dados.objBD.mensagem());
+								JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco = " + Dados.objBD.mensagem());
 							}
 							
 							if (sucesso) {
@@ -294,40 +261,24 @@ public class Tasks extends JFrame {
 								janela.setVisible(true);
 								setVisible(false);
 							}
-							
-							
-							
 						}
 					});
 					panel_post1_1.add(btnOk_1);
 					
 					JPanel panel_POSTAGEM_2 = new JPanel();
 					verticalBox_1.add(panel_POSTAGEM_2);
-					
-				
 				}
 			} catch (Exception e2 ) {
-			System.out.println("Deu tudo errado mano, olha só = " + e2);
+			JOptionPane.showMessageDialog(null, "Deu tudo errado mano, olha só = " + e2);
 		}
 			 
 		} else {
-			System.out.println("Erro ao conectar ao banco! "  + Dados.objBD.mensagem());
+			JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco! "  + Dados.objBD.mensagem());
 		}
-
-																				
 	
         JScrollPane scrollPane2 = new JScrollPane(panel_1);
 		scrollPane2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		//contentPane.setPreferredSize(new Dimension(500, 400));
-
 		contentPane.add(scrollPane2);
-
-		//frame.setContentPane(contentPane);
-		//frame.pack();
-		//frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		//frame.setVisible(true);
-		
-		
 
 		JPanel inferior = new JPanel();
 		contentPane.add(inferior, BorderLayout.SOUTH);
@@ -346,9 +297,5 @@ public class Tasks extends JFrame {
 		
 		JLabel lblNovaTarefa2 = new JLabel("Adicionar nova tarefa");
 		inferior.add(lblNovaTarefa2);
-		
-
 	}
-	
-
 }

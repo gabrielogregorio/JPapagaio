@@ -44,51 +44,32 @@ public class Editar extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Editar(String ID, String voltarTela) {
 		setTitle("Editar");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				
-				
 				String sqlPesquisa = "SELECT ID, TITULO, DESCRICAO, PRIORIDADE, STATUS FROM TAREFAS WHERE ID = " + ID;
-				Dados.Consultar(sqlPesquisa);
-
-				if (Dados.objBD.conectaBD()) {
-					System.out.println("Conectou ao banco de dados!");
-					ResultSet objRes = Dados.objBD.consulta(sqlPesquisa);
-					
-					try {
-						if (objRes.next()) {
-							textField_titulo.setText(objRes.getString("TITULO"));
-							textField_descricao.setText(objRes.getString("DESCRICAO"));
-							textField_prioridade.setText(objRes.getString("PRIORIDADE"));
-							textField_status.setText(objRes.getString("STATUS"));
+					if (Dados.objBD.conectaBD()) {
+						System.out.println("Conectou ao banco de dados!");
+						ResultSet objRes = Dados.objBD.consulta(sqlPesquisa);
+						
+						try {
+							if (objRes.next()) {
+								textField_titulo.setText(objRes.getString("TITULO"));
+								textField_descricao.setText(objRes.getString("DESCRICAO"));
+								textField_prioridade.setText(objRes.getString("PRIORIDADE"));
+								textField_status.setText(objRes.getString("STATUS"));
 							}
-					} catch (Exception e2 ) {
-						System.out.println("Deu tudo errado mano, olha só => " + e2);
+						} catch (Exception e2 ) {
+							System.out.println("Deu tudo errado mano, olha só => " + e2);
+						}
+						 
+					} else {
+						System.out.println("Erro ao conectar ao banco! "  + Dados.objBD.mensagem());
 					}
-					 
-				} else {
-					System.out.println("Erro ao conectar ao banco! "  + Dados.objBD.mensagem());
-				}
-				
-				
-				
-				//String sqlInsert = "INSERT INTO PESSOAS(EMAIL, NOME, NASCIMENTO, SENHA) VALUES ('aluno@gmail.com', 'Lisa Sobraia', '19970301', '144')";
-				//teste.Inserir(sqlInsert);
-
-				//String sqlAtualiza = "update PESSOAS set EMAIL='alunos2@gmail.com', NOME = 'Lisa Sobrano' where SENHA = '144'";
-				//teste.Atualizar(sqlAtualiza);
-				
-				//String sqlExcluir = "DELETE FROM PESSOAS WHERE EMAIL = 'alunos2@gmail.com'";
-				//teste.Atualizar(sqlExcluir);
-				
-				
-			}
+				} 
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -179,9 +160,15 @@ public class Editar extends JFrame {
 		JButton btnNewButton_1 = new JButton("Cancelar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Tasks janela = new Tasks();
-				janela.setVisible(true);
-				setVisible(false);
+				if (voltarTela == "Tasks") {
+					Tasks janela = new Tasks();
+					janela.setVisible(true);
+					setVisible(false);
+				} else if (voltarTela == "Concluidos") {
+					Concluidos janela = new Concluidos();
+					janela.setVisible(true);
+					setVisible(false);
+				}
 			}
 		});
 		btnNewButton_1.setForeground(Color.WHITE);
@@ -194,7 +181,6 @@ public class Editar extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean sucesso = true;
-				
 				
 				String sqlAtualiza = "UPDATE TAREFAS SET "
 						+ "TITULO = '" + textField_titulo.getText().toString() + "', "
@@ -227,7 +213,6 @@ public class Editar extends JFrame {
 						Concluidos janela = new Concluidos();
 						janela.setVisible(true);
 						setVisible(false);
-						
 					}
 					 
 				}

@@ -161,7 +161,17 @@ public class Adicionar extends JFrame {
 						+ "',"
 						+ textNumeroPrioridade.getText()
 						+ ", 'A FAZER')";
-				Dados.Inserir(sqlInsert);
+
+				if (Dados.objBD.conectaBD()) {
+					try {
+						Dados.objBD.atualiza(sqlInsert);
+						System.out.println("Inserindo o valor");
+					} catch(Exception e) {
+						JOptionPane.showMessageDialog(null, "Erro => " + e + ", erro classe" + Dados.objBD.mensagem());
+					}			
+				} else {
+					JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco => " + Dados.objBD.mensagem());
+				}
 
 				Tasks janela = new Tasks();
 				janela.setVisible(true);
