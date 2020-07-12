@@ -177,8 +177,6 @@ public class Concluidos extends JFrame {
 
         JScrollPane scrollPane2 = new JScrollPane(panel_1);
 		scrollPane2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		//contentPane.setPreferredSize(new Dimension(500, 400));
-
 		contentPane.add(scrollPane2);
 	}
 }
